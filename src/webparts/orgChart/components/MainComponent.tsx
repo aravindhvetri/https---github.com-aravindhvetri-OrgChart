@@ -80,12 +80,20 @@ const MainComponent = ({ context }) => {
             member.email?.toLowerCase()
         );
 
+        const imgUrl = `/_layouts/15/userphoto.aspx?size=L&username=${member?.email}`;
+        const node: TreeNode = {
+          label: member.name,
+          data: {
+            name: member.name,
+            email: member.email,
+            imageUrl: imgUrl,
+          },
+        };
+
         if (isAlsoManager) {
           children.push(buildTreeFromEmployee(member, data));
         } else {
-          children.push({
-            label: member.name,
-          });
+          children.push(node);
         }
       });
     }
@@ -93,8 +101,24 @@ const MainComponent = ({ context }) => {
     return {
       label: employee?.name,
       expanded: true,
+      data: {
+        name: employee.name,
+        email: employee.email,
+        imageUrl: `/_layouts/15/userphoto.aspx?size=L&username=${employee?.email}`,
+      },
       children: children,
     };
+  };
+
+  //Template for rendering each node in the org chart:
+  const nodeTemplate = (node: TreeNode) => {
+    const { name, imageUrl } = node.data || {};
+    return (
+      <div className="nodeTemplateContainer">
+        <img src={imageUrl} alt={name} />
+        <span>{name}</span>
+      </div>
+    );
   };
 
   //Initial Render:
@@ -105,7 +129,9 @@ const MainComponent = ({ context }) => {
   return (
     <div className="card overflow-x-auto">
       <h2 className="OrgHeading">Organization Chart</h2>
-      {orgChartData.length > 0 && <OrganizationChart value={orgChartData} />}
+      {orgChartData.length > 0 && (
+        <OrganizationChart value={orgChartData} nodeTemplate={nodeTemplate} />
+      )}
     </div>
   );
 };
