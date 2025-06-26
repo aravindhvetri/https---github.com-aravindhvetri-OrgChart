@@ -48,7 +48,8 @@ div[data-automationid="SiteHeader"] {
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  font-size: 14px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
 }
 .p-organizationchart .p-organizationchart-node-content .p-node-toggler {
   background: white;
@@ -65,8 +66,8 @@ div[data-automationid="SiteHeader"] {
   background: #00000063;
 }
 .p-node-toggler svg {
-  height: 13px;
-  width: 13px;
+  height: 12px;
+  width: 12px;
 }
 .OrgHeading {
   text-transform: uppercase;
@@ -77,9 +78,21 @@ div[data-automationid="SiteHeader"] {
 }
 .p-organizationchart {
   padding: 20px;
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-  border-radius: 6px;
-  height: 82vh;
-  overflow: auto;
   margin: 20px;
+  overflow: auto;
+}
+.nodeTemplateContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.nodeTemplateContainer img {
+  position: absolute;
+  content: "";
+  right: -46px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
 }
